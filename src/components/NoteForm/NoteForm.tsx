@@ -10,8 +10,8 @@ interface NoteFomProps {
 }
 
 const initialValues: NoteFomProps = {
-  title: "Please type..",
-  content: "Content belongs here ",
+  title: "",
+  content: "",
   tag: "Todo",
 };
 
@@ -47,7 +47,7 @@ export default function NoteForm() {
         <div className={css.formGroup}>
           <label htmlFor={`${inputId}-title`}>Title</label>
           <Field className={css.input} type="text" name="title" />
-          <ErrorMessage name="username" component="span" />
+          <ErrorMessage name="title" component="span" />
         </div>
         <div className={css.formGroup}>
           <label htmlFor={`${inputId}-content`}>Content</label>

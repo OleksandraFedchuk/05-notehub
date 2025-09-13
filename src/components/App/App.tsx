@@ -3,16 +3,25 @@ import SearchBox from "../SearchBox/SearchBox";
 import Pagination from "../Pagination/Pagination";
 import NoteList from "../NoteList/NoteList";
 import NoteForm from "../NoteForm/NoteForm";
+import { useState } from "react";
+import Modal from "../Modal/Modal";
 
 export default function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
         <NoteList />
         <SearchBox />
         {/* <Pagination /> */}
-        <NoteForm />
-        <button className={css.button}>Create note +</button>
+        <button onClick={openModal} className={css.button}>
+          Create note +
+        </button>
+        {isModalOpen && <Modal onClose={closeModal} />}
       </header>
     </div>
   );
