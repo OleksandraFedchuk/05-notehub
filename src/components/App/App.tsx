@@ -24,8 +24,7 @@ export default function App() {
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        {/* {data && <NoteList />} */}
-        <NoteList />
+        {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
 
         <SearchBox />
         {/* <Pagination /> */}
