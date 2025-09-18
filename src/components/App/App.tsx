@@ -7,6 +7,7 @@ import { fetchNotes } from "../../servecies/noteService";
 
 import Modal from "../Modal/Modal";
 import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData } from "@tanstack/react-query";
 
 export default function App() {
   const [page, setPage] = useState(1);
@@ -14,6 +15,7 @@ export default function App() {
   const { data } = useQuery({
     queryKey: ["note", page],
     queryFn: () => fetchNotes(page, 12),
+    placeholderData: keepPreviousData,
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
