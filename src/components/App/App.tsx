@@ -12,11 +12,13 @@ import { keepPreviousData } from "@tanstack/react-query";
 export default function App() {
   const [page, setPage] = useState(1);
 
-  const { data } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ["note", page],
     queryFn: () => fetchNotes(page, 12),
     placeholderData: keepPreviousData,
   });
+
+  const totalPages = data?.totalPages ?? 1;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,7 +31,10 @@ export default function App() {
         {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
 
         <SearchBox />
-        {/* <Pagination /> */}
+        {/* {isSuccess && totalPages > 1 && (
+          <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+        )} */}
+
         <button onClick={openModal} className={css.button}>
           Create note +
         </button>

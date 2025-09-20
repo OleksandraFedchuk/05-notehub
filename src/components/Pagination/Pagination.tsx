@@ -1,10 +1,17 @@
 import css from "./Pagination.module.css";
-import { useState } from "react";
 import ReactPaginate from "react-paginate";
 
-export default function Pagination() {
-  const [page, setPage] = useState(1);
+interface PaginationProps {
+  page: number;
+  totalPage: number;
+  setPage: (page: number) => void;
+}
 
+export default function Pagination({
+  page,
+  totalPage,
+  setPage,
+}): PaginationProps {
   return (
     <>
       <ReactPaginate
