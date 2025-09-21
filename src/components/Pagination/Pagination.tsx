@@ -13,18 +13,16 @@ export default function Pagination({
   setPage,
 }): PaginationProps {
   return (
-    <>
-      <ReactPaginate
-        pageCount={totalPages}
-        pageRangeDisplayed={4}
-        marginPagesDisplayed={1}
-        onPageChange={({ selected }) => setCurrentPage(selected + 1)}
-        forcePage={currentPage - 1}
-        containerClassName={css.pagination}
-        activeClassName={css.active}
-        nextLabel="→"
-        previousLabel="←"
-      />
-    </>
+    <ReactPaginate
+      pageCount={totalPages}
+      pageRangeDisplayed={4}
+      marginPagesDisplayed={1}
+      onPageChange={({ selected }) => setCurrentPage(selected + 1)}
+      forcePage={currentPage - 1}
+      containerClassName={css.pagination}
+      activeClassName={css.active}
+      nextLabel="→"
+      previousLabel="←"
+    />
   );
 }

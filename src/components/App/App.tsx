@@ -11,6 +11,7 @@ import { keepPreviousData } from "@tanstack/react-query";
 
 export default function App() {
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   const { data, isSuccess } = useQuery({
     queryKey: ["note", page],
@@ -18,7 +19,7 @@ export default function App() {
     placeholderData: keepPreviousData,
   });
 
-  const totalPages = data?.totalPages ?? 1;
+  const totalPages = data?.totalPages || 1;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
