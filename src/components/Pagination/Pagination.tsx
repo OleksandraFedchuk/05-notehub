@@ -1,28 +1,48 @@
-import css from "./Pagination.module.css";
 import ReactPaginate from "react-paginate";
+import css from "./Pagination.module.css";
 
 interface PaginationProps {
-  page: number;
-  totalPage: number;
-  setPage: (page: number) => void;
+  pageCount: number;
+  currentPage?: number;
+  onPageChange: (page: number) => void;
 }
 
 export default function Pagination({
-  page,
-  totalPage,
-  setPage,
+  pageCount,
+  currentPage,
+  onPageChange,
 }: PaginationProps) {
+  if (pageCount <= 1) return null;
+
+  function handlePageChange(selectedItem: { selected: number }) {
+    onPageChange(selectedItem.selected + 1);
+  }
+
   return (
-    <ReactPaginate
-      pageCount={totalPage}
-      pageRangeDisplayed={4}
-      marginPagesDisplayed={1}
-      onPageChange={({ selected }) => setPage(selected + 1)}
-      forcePage={page - 1}
-      containerClassName={css.pagination}
-      activeClassName={css.active}
-      nextLabel="→"
-      previousLabel="←"
-    />
+    <nav aria-label="Notes pagination" className={css.wrapper}>
+      <ReactPaginate
+        pageCount={pageCount}
+        onPageChange={handlePageChange}
+        forcePage={
+          typeof currentPage === "number" ? currentPage - 1 : undefined
+        }
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={3}
+        previousLabel="←"
+        nextLabel="→"
+        breakLabel="…"
+        containerClassName={css.pagination}
+        pageClassName={css.page}
+        pageLinkClassName={css.link}
+        previousClassName={css.page}
+        nextClassName={css.page}
+        previousLinkClassName={css.link}
+        nextLinkClassName={css.link}
+        breakClassName={css.page}
+        breakLinkClassName={css.link}
+        activeClassName={css.active}
+        disabledClassName={css.disabled}
+      />
+    </nav>
   );
 }
